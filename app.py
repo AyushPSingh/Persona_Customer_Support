@@ -47,14 +47,14 @@ st.divider()
 
 # ─── Sidebar: info + reset ────────────────────────────────────────────────
 with st.sidebar:
-    st.header("ℹ️ About")
+    st.header("About")
     st.markdown(
         """
 This agent:
-- 🔍 **Detects** your persona (Technical Expert, Frustrated User, Business Executive)
-- 📚 **Retrieves** relevant knowledge-base articles via RAG (FAISS)
-- 🎭 **Adapts** its response tone to match your persona
-- 🚨 **Escalates** to a human agent when high-risk phrases are detected
+-  **Detects** your persona (Technical Expert, Frustrated User, Business Executive)
+-  **Retrieves** relevant knowledge-base articles via RAG (FAISS)
+-  **Adapts** its response tone to match your persona
+-  **Escalates** to a human agent when high-risk phrases are detected
 
 **Try asking:**
 - *"How do I handle 429 rate-limit errors in my API calls?"* (Technical)
@@ -69,7 +69,7 @@ This agent:
         st.rerun()
 
     st.divider()
-    st.subheader("📊 Session Stats")
+    st.subheader("Session Stats")
     if "meta" in st.session_state and st.session_state.meta:
         turns = st.session_state.meta
         escalations = sum(1 for m in turns if m.get("escalated"))

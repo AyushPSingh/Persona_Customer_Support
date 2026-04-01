@@ -10,7 +10,7 @@ import os
 from dotenv import load_dotenv
 
 from langchain_groq import ChatGroq
-from langchain.schema import HumanMessage, SystemMessage
+from langchain_core.messages import HumanMessage, SystemMessage, AIMessage
 
 from agent_state import AgentState
 from vector_store import retrieve
@@ -18,7 +18,7 @@ from vector_store import retrieve
 load_dotenv()
 
 # ─── LLM initialisation ────────────────────────────────────────────────────
-def _get_llm(model: str = "llama3-8b-8192") -> ChatGroq:
+def _get_llm(model: str = "llama-3.3-70b-versatile") -> ChatGroq:
     api_key = os.getenv("GROQ_API_KEY", "")
     if not api_key:
         raise EnvironmentError(
@@ -144,7 +144,6 @@ def response_generation_node(state: AgentState) -> AgentState:
         if turn["role"] == "user":
             messages.append(HumanMessage(content=turn["content"]))
         elif turn["role"] == "assistant":
-            from langchain.schema import AIMessage
             messages.append(AIMessage(content=turn["content"]))
 
     messages.append(HumanMessage(content=state["user_message"]))
